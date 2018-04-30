@@ -33,14 +33,14 @@ namespace Sep
       //
       enum FieldType
       {
-        GRASS,
-        WATER,
-        OBSTACLE,
-        STREET,
-        HOME,
-        MARKET,
-        CLINIC,
-        TOWNHALL
+        GRASS = 'G',
+        WATER = 'W',
+        OBSTACLE = 'O',
+        STREET ='S',
+        HOME = 'H',
+        MARKET = 'M',
+        CLINIC = 'C',
+        TOWNHALL = 'T'
       };
     
       //------------------------------------------------------------------------
@@ -52,8 +52,10 @@ namespace Sep
       /// Creates a new Field instance with a specified field type.
       ///
       /// @param type The field type of the new Field instance.
+      /// @param width The width of the new Field instance.
+      /// @param height The height of the new Field instance.
       //
-      Field(const FieldType type);
+      Field(const FieldType type, const int width, const int height);
     
       //------------------------------------------------------------------------
       /// Creates a new Field instance by copying the attributes of a specified
@@ -84,21 +86,52 @@ namespace Sep
       ///
       /// @return string The name of a specified field type.
       //
-      static string getName(const FieldType type);
+      static const string getName(const FieldType type);
     
       //------------------------------------------------------------------------
       /// Returns the field type of a Field instance.
       ///
       /// @return FieldType The field type of the receiver.
       //
-      FieldType getType();
+      const FieldType getType();
+    
+      //------------------------------------------------------------------------
+      /// Returns the width of a Field instance.
+      ///
+      /// @return int The width of the receiver.
+      //
+      const int getWidth();
+    
+      //------------------------------------------------------------------------
+      /// Returns the height of a Field instance.
+      ///
+      /// @return int The height of the receiver.
+      //
+      const int getHeight();
+    
+      //------------------------------------------------------------------------
+      /// Returns the size of a Field instance.
+      ///
+      /// @return int The size of the receiver.
+      //
+      const int getSize();
     
     private:
     
       //------------------------------------------------------------------------
-      /// The type of the field instance.
+      /// The field's type.
       //
       FieldType type_;
+    
+      //------------------------------------------------------------------------
+      /// The field's width on the map.
+      //
+      int width_;
+    
+      //------------------------------------------------------------------------
+      /// The field's heigth on the map.
+      //
+      int height_;
   };
 }
 

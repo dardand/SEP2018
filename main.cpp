@@ -18,7 +18,8 @@
 #include "Interface.h"
 #include "Field.h"
 #include "Game.h"
-#include <memory>
+#include "BadConfigException.h"
+
 namespace Sep
 {
   static constexpr int RETURN_OK = 0;
@@ -71,6 +72,12 @@ int main(int argc, char *argv[])
     game.run();
     Sep::Interface::stop();
     return Sep::RETURN_OK;
+  }
+  catch(Sep::BadConfigException &e)
+  {
+    Sep::Interface::error(e.what());
+    Sep::Interface::stop();
+    return Sep::RETURN_ERROR_BAD_CONFIG;
   }
   catch(std::bad_alloc &e)
   {

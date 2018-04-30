@@ -18,27 +18,32 @@ using Sep::Field;
 // MARK: - Life cycle methods
 
 //------------------------------------------------------------------------------
-Field::Field()
+Field::Field() : Field(FieldType::GRASS, 1, 1)
 {
-  type_ = GRASS;
 }
 
 //------------------------------------------------------------------------------
-Field::Field(const FieldType type)
+Field::Field(const FieldType type, const int width, const int heigth)
 {
   type_ = type;
+  width_ = width;
+  height_ = heigth;
 }
 
 //------------------------------------------------------------------------------
 Field::Field(const Field &field)
 {
   type_ = field.type_;
+  width_ = field.width_;
+  height_ = field.height_;
 }
 
 //------------------------------------------------------------------------------
 Field Field::operator = (const Field &field)
 {
   type_ = field.type_;
+  width_ = field.width_;
+  height_ = field.height_;
   return *this;
 }
 
@@ -52,25 +57,25 @@ Field::~Field()
 // MARK: - Getter methods
 
 //------------------------------------------------------------------------------
-string Field::getName(const FieldType type)
+const string Field::getName(const FieldType type)
 {
   switch (type)
   {
-    case GRASS:
+    case FieldType::GRASS:
       return "Grass";
-    case WATER:
+    case FieldType::WATER:
       return "Water";
-    case OBSTACLE:
+    case FieldType::OBSTACLE:
       return "Obstacle";
-    case STREET:
+    case FieldType::STREET:
       return "Street";
-    case HOME:
+    case FieldType::HOME:
       return "Home";
-    case MARKET:
+    case FieldType::MARKET:
       return "Market";
-    case CLINIC:
+    case FieldType::CLINIC:
       return "Clinic";
-    case TOWNHALL:
+    case FieldType::TOWNHALL:
       return "Town Hall";
     default:
       return "Unknown";
@@ -78,7 +83,25 @@ string Field::getName(const FieldType type)
 }
 
 //------------------------------------------------------------------------------
-Field::FieldType Field::getType()
+const Field::FieldType Field::getType()
 {
   return type_;
+}
+
+//------------------------------------------------------------------------------
+const int Field::getWidth()
+{
+  return width_;
+}
+
+//------------------------------------------------------------------------------
+const int Field::getHeight()
+{
+  return height_;
+}
+
+//------------------------------------------------------------------------------
+const int Field::getSize()
+{
+  return width_ * height_;
 }

@@ -16,11 +16,13 @@
 #include <string>
 #include <vector>
 #include "Field.h"
+#include "Map.h"
 
 using std::string;
 using std::vector;
 using Sep::Field;
 using FieldType = Field::FieldType;
+using Sep::Map;
 
 namespace Sep
 {
@@ -68,23 +70,65 @@ namespace Sep
       /// Displays the current playing field.
       //
       void run();
-      void setRunning(bool x);
-      bool getRunning();
+    
       //------------------------------------------------------------------------
-      /// Sets the a specified field at given coordinates and returns whether
-      /// the coordinates are inside the playing field.
+      /// Changes the running state of the current game with a specified
+      /// boolean value.
       ///
-      /// @param field The Field instance, whose type to set.
-      /// @param x The x coordinate, where the field should be set.
-      /// @param y The y coordinate, where the field should be set.
-      ///
-      /// @return If the x and y coordinates are inside the playing field, true
-      ///         is returned, otherwise false.
+      /// @param running A boolean value indicating whether the game is running.
       //
-      bool setField(Field &field, int x, int y);
+      void setRunning(bool running);
+    
+      //------------------------------------------------------------------------
+      /// Returns a boolean value whether the current game is running.
+      //
+      bool getRunning();
+    
+      //------------------------------------------------------------------------
+      /// Builds a field with specified type at a specified position.
+      ///
+      /// @param type The type of the field to build.
+      /// @param x The horizontal position of the field to build.
+      /// @param y The vertical position of the field to build.
+      ///
+      /// @return bool A boolen value indicating whether the field was build
+      ///              successfully.
+      //
+      bool build(const FieldType type, const int x, const int y);
+    
+      //------------------------------------------------------------------------
+      /// Builds a field with specified type and size at a specified position.
+      ///
+      /// @param type The type of the field to build.
+      /// @param x The horizontal position of the field to build.
+      /// @param y The vertical position of the field to build.
+      /// @param width The width of the field to build.
+      /// @param height The height of the field to build.
+      ///
+      /// @return bool A boolen value indicating whether the field was build
+      ///              successfully.
+      bool build(const FieldType type, const int x, const int y, const int width,
+                 const int height);
+    
+      //------------------------------------------------------------------------
+      /// Destroys a field on the map at a specified position. All related
+      /// fields will be destroyed too. Fields to destroy will be set to GRASS.
+      ///
+      /// @param x The horizontal position of the field to destroy.
+      /// @param y The vertical position of the field to destroy.
+      ///
+      /// @return bool A boolean value indicating whether the destruction at the
+      ///              specified positon was successfully.
+      //
+      bool destroy(const int x, const int y);
     
     private:
-      bool running = 1;
+    
+      //------------------------------------------------------------------------
+      /// A boolean value indicating whether the game is running.
+      //
+      bool running_ = true;
+    
       //------------------------------------------------------------------------
       /// The width of the current playing field.
       //
@@ -113,7 +157,20 @@ namespace Sep
       //------------------------------------------------------------------------
       /// The current playing field.
       //
-      vector<vector<FieldType>> map_;
+      Sep::Map map_;
+    
+      //------------------------------------------------------------------------
+      /// Sets the a specified field at given coordinates and returns whether
+      /// the coordinates are inside the playing field.
+      ///
+      /// @param field The Field instance, whose type to set.
+      /// @param x The x coordinate, where the field should be set.
+      /// @param y The y coordinate, where the field should be set.
+      ///
+      /// @return If the x and y coordinates are inside the playing field, true
+      ///         is returned, otherwise false.
+      //
+      bool setField(Field &field, int x, int y);
   };
 }
 
