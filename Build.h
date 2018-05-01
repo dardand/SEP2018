@@ -32,7 +32,7 @@ class Build : public Command
     // Constructor
     Build();
     Build(std::string name);
-
+    Sep::Field getType(std::string type);
     //--------------------------------------------------------------------------
     // Destructor
     virtual ~Build();

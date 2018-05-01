@@ -121,7 +121,29 @@ namespace Sep
       ///              specified positon was successfully.
       //
       bool destroy(const int x, const int y);
-    
+      
+            //------------------------------------------------------------------------
+      /// This function returns the current amount of available funds.
+      /// 
+      /// @return money_ The amount of money.
+      //
+      int getMoney()
+      {
+        return money_;
+      }
+
+      //------------------------------------------------------------------------
+      /// Sets the a specified field at given coordinates and returns whether
+      /// the coordinates are inside the playing field.
+      ///
+      /// @param field The Field instance, whose type to set.
+      /// @param x The x coordinate, where the field should be set.
+      /// @param y The y coordinate, where the field should be set.
+      ///
+      /// @return If the x and y coordinates are inside the playing field, true
+      ///         is returned, otherwise false.
+      //
+      bool setField(Field &field, int x, int y);
     private:
     
       //------------------------------------------------------------------------
@@ -159,18 +181,6 @@ namespace Sep
       //
       Sep::Map map_;
     
-      //------------------------------------------------------------------------
-      /// Sets the a specified field at given coordinates and returns whether
-      /// the coordinates are inside the playing field.
-      ///
-      /// @param field The Field instance, whose type to set.
-      /// @param x The x coordinate, where the field should be set.
-      /// @param y The y coordinate, where the field should be set.
-      ///
-      /// @return If the x and y coordinates are inside the playing field, true
-      ///         is returned, otherwise false.
-      //
-      bool setField(Field &field, int x, int y);
   };
 }
 

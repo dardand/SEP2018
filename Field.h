@@ -116,6 +116,10 @@ namespace Sep
       //
       const int getSize();
     
+      void setType(FieldType type)
+      {
+        type_ = type;
+      }
     private:
     
       //------------------------------------------------------------------------

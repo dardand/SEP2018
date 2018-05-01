@@ -227,8 +227,6 @@ void Game::run()
      }
      found = false;
   }
-  io_.out(Sep::Interface::MONEY, std::to_string(money_));
-  map_.print(io_);
 }
 
 //------------------------------------------------------------------------------

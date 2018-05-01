@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F83CF32D2095F7A6009966D0 /* Point.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F83CF32B2095F7A6009966D0 /* Point.cpp */; };
+		F8438B3420925DC800E5C4B1 /* Buildable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F8438B3220925DC800E5C4B1 /* Buildable.cpp */; };
+		F8438B3720925EFA00E5C4B1 /* Destroyable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F8438B3520925EFA00E5C4B1 /* Destroyable.cpp */; };
+		F84D688C2091D8CC0094C18E /* Map.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F84D688A2091D8CC0094C18E /* Map.cpp */; };
+		F899487B2092371C009D2A25 /* BadConfigException.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F89948792092371C009D2A25 /* BadConfigException.cpp */; };
 		F8B0C32C2063249E005DCE3D /* Interface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F8B0C32B2063249E005DCE3D /* Interface.cpp */; };
 		F8B0C33020632571005DCE3D /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F8B0C32F20632571005DCE3D /* main.cpp */; };
 		F8C43CA420906B0B00DB19A2 /* Command.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F8C43CA020906B0A00DB19A2 /* Command.cpp */; };
@@ -28,6 +33,17 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		F83CF32B2095F7A6009966D0 /* Point.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Point.cpp; sourceTree = "<group>"; };
+		F83CF32C2095F7A6009966D0 /* Point.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Point.h; sourceTree = "<group>"; };
+		F8438B3220925DC800E5C4B1 /* Buildable.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Buildable.cpp; sourceTree = "<group>"; };
+		F8438B3320925DC800E5C4B1 /* Buildable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Buildable.h; sourceTree = "<group>"; };
+		F8438B3520925EFA00E5C4B1 /* Destroyable.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Destroyable.cpp; sourceTree = "<group>"; };
+		F8438B3620925EFA00E5C4B1 /* Destroyable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Destroyable.h; sourceTree = "<group>"; };
+		F84D688A2091D8CC0094C18E /* Map.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Map.cpp; sourceTree = "<group>"; };
+		F84D688B2091D8CC0094C18E /* Map.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Map.h; sourceTree = "<group>"; };
+		F84D688D2091E8770094C18E /* sample_config.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = sample_config.txt; sourceTree = "<group>"; };
+		F89948792092371C009D2A25 /* BadConfigException.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = BadConfigException.cpp; sourceTree = "<group>"; };
+		F899487A2092371C009D2A25 /* BadConfigException.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BadConfigException.h; sourceTree = "<group>"; };
 		F8B0C3292063249E005DCE3D /* lib */ = {isa = PBXFileReference; lastKnownFileType = folder; path = lib; sourceTree = "<group>"; };
 		F8B0C32A2063249E005DCE3D /* Interface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Interface.h; sourceTree = "<group>"; };
 		F8B0C32B2063249E005DCE3D /* Interface.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Interface.cpp; sourceTree = "<group>"; };
@@ -57,12 +73,23 @@
 		F8B0C32820631E41005DCE3D /* SEPCity */ = {
 			isa = PBXGroup;
 			children = (
+				F84D688D2091E8770094C18E /* sample_config.txt */,
 				F8B0C33120632A57005DCE3D /* Framework */,
 				F8B0C32F20632571005DCE3D /* main.cpp */,
+				F83CF32C2095F7A6009966D0 /* Point.h */,
+				F83CF32B2095F7A6009966D0 /* Point.cpp */,
 				F8F799FA205D4F49002037F8 /* Field.h */,
 				F8F799F8205D4F49002037F8 /* Field.cpp */,
+				F8438B3320925DC800E5C4B1 /* Buildable.h */,
+				F8438B3220925DC800E5C4B1 /* Buildable.cpp */,
+				F8438B3620925EFA00E5C4B1 /* Destroyable.h */,
+				F8438B3520925EFA00E5C4B1 /* Destroyable.cpp */,
 				F8F799FB205D4F49002037F8 /* Game.h */,
 				F8F799F9205D4F49002037F8 /* Game.cpp */,
+				F899487A2092371C009D2A25 /* BadConfigException.h */,
+				F89948792092371C009D2A25 /* BadConfigException.cpp */,
+				F84D688B2091D8CC0094C18E /* Map.h */,
+				F84D688A2091D8CC0094C18E /* Map.cpp */,
 				F8C43CA020906B0A00DB19A2 /* Command.cpp */,
 				F8C43CA320906B0B00DB19A2 /* Command.h */,
 				F8C43CA220906B0B00DB19A2 /* Quit.cpp */,
@@ -157,10 +184,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				F8C43CA520906B0B00DB19A2 /* Quit.cpp in Sources */,
+				F8438B3420925DC800E5C4B1 /* Buildable.cpp in Sources */,
 				F8B0C32C2063249E005DCE3D /* Interface.cpp in Sources */,
 				F8F799FD205D4F49002037F8 /* Game.cpp in Sources */,
+				F83CF32D2095F7A6009966D0 /* Point.cpp in Sources */,
+				F899487B2092371C009D2A25 /* BadConfigException.cpp in Sources */,
 				F8B0C33020632571005DCE3D /* main.cpp in Sources */,
 				F8F799FC205D4F49002037F8 /* Field.cpp in Sources */,
+				F84D688C2091D8CC0094C18E /* Map.cpp in Sources */,
+				F8438B3720925EFA00E5C4B1 /* Destroyable.cpp in Sources */,
 				F8C43CA420906B0B00DB19A2 /* Command.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
