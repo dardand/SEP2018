@@ -17,37 +17,46 @@ Build::Build()
 }
 
 //------------------------------------------------------------------------------
-Sep::Field Build::getType(std::string type)
+Sep::Field* Build::getType(std::string type)
 {
   int check = 0;
   if(!type.compare("water"))
   {
-    check = 0;
+    check = 1;
   }
   else if(!type.compare("obstacle"))
   {
-    check = 1;
+    check = 2;
   }
   else if(!type.compare("street"))
   {
-    check = 2;
+    check = 3;
   }
   switch(check)
   {
-    case 0:
-    {
-      Sep::Field water(FieldType::WATER, 1, 1);
-      return water;
-    }
     case 1:
     {
-      Sep::Field obstacle(FieldType::OBSTACLE, 1, 1);
-      return obstacle;
+      Sep::Field *water = new Sep::Field(FieldType::WATER, 1, 1);
+      std::cout << "HERE AT water" << std::endl;
+      return water;
     }
     case 2:
     {
-      Sep::Field street(FieldType::STREET, 1, 1);
+      Sep::Field *obstacle = new Sep::Field(FieldType::OBSTACLE, 1, 1);
+      std::cout << "HERE AT obstacle" << std::endl;
+      return obstacle;
+    }
+    case 3:
+    {
+      Sep::Field *street = new Sep::Field(FieldType::STREET, 1, 1);
+      std::cout << "HERE AT street" << std::endl;
       return street;
+    }
+    default:
+    {
+      Sep::Field *unknown = new Sep::Field(FieldType::UNKNOWN, 1, 1);
+      //std::cout << "[ERR] Usage: build\n";
+      return unknown;
     }
   }
   
@@ -69,8 +78,6 @@ int Build::execute(Sep::Game& game, std::vector<std::string>& parameters)
   Sep::Interface io_;
   Sep::Game get_money(game);
   Build obj;
-  Sep::Field *type = new Sep::Field;
-  *type = obj.getType(parameters[0]);
   if(parameters.size() != 3)
   {
     std::cout << "[ERR] Usage: build\n";
@@ -88,8 +95,8 @@ int Build::execute(Sep::Game& game, std::vector<std::string>& parameters)
       }
     }
   }
-  
-  if(is_not_number)
+  Sep::Field *type = obj.getType(parameters[0]);
+  if(is_not_number || type->getType() == FieldType::UNKNOWN)
   {
     std::cout << "[ERR] Usage: build\n";
   }
@@ -99,6 +106,5 @@ int Build::execute(Sep::Game& game, std::vector<std::string>& parameters)
     game.setField(*type, stoi(parameters[1], nullptr, 10), stoi(parameters[2], nullptr, 10));
   }
   
-  delete type;
   return -1;
 }

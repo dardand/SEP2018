@@ -40,7 +40,8 @@ namespace Sep
         HOME = 'H',
         MARKET = 'M',
         CLINIC = 'C',
-        TOWNHALL = 'T'
+        TOWNHALL = 'T',
+        UNKNOWN = 'U'
       };
     
       //------------------------------------------------------------------------
@@ -116,10 +117,7 @@ namespace Sep
       //
       const int getSize();
     
-      void setType(FieldType type)
-      {
-        type_ = type;
-      }
+      Field(const FieldType type);
     private:
     
       //------------------------------------------------------------------------

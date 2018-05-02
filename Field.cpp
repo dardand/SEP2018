@@ -10,7 +10,7 @@
 //
 
 #include "Field.h"
-
+#include <iostream>
 using Sep::Field;
 
 
@@ -31,11 +31,18 @@ Field::Field(const FieldType type, const int width, const int heigth)
 }
 
 //------------------------------------------------------------------------------
+Field::Field(const FieldType type)
+{
+  type_ = type;
+}
+
+//------------------------------------------------------------------------------
 Field::Field(const Field &field)
 {
   type_ = field.type_;
   width_ = field.width_;
   height_ = field.height_;
+  std::cout << "COPY CONSTRUCTOR";
 }
 
 //------------------------------------------------------------------------------

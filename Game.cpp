@@ -281,6 +281,7 @@ bool Game::setField(Field &field, int x, int y)
   }
   else
   {
+    //std::cout << "OUT OF RANGE";
     return false;
   }
 }
