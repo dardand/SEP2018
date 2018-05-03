@@ -10,7 +10,7 @@
 //
 
 #include "Field.h"
-#include <iostream>
+
 using Sep::Field;
 
 
@@ -18,31 +18,20 @@ using Sep::Field;
 // MARK: - Life cycle methods
 
 //------------------------------------------------------------------------------
-Field::Field() : Field(FieldType::GRASS, 1, 1)
+Field::Field() : Field(FieldType::GRASS)
 {
 }
 
 //------------------------------------------------------------------------------
-Field::Field(const FieldType type, const int width, const int heigth)
+Field::Field(const FieldType type, const int width, const int height)
+              : type_(type), width_(width), height_(height)
 {
-  type_ = type;
-  width_ = width;
-  height_ = heigth;
-}
-
-//------------------------------------------------------------------------------
-Field::Field(const FieldType type)
-{
-  type_ = type;
 }
 
 //------------------------------------------------------------------------------
 Field::Field(const Field &field)
+              : type_(field.type_), width_(field.width_), height_(field.height_)
 {
-  type_ = field.type_;
-  width_ = field.width_;
-  height_ = field.height_;
-  std::cout << "COPY CONSTRUCTOR";
 }
 
 //------------------------------------------------------------------------------
@@ -111,4 +100,25 @@ const int Field::getHeight()
 const int Field::getSize()
 {
   return width_ * height_;
+}
+
+//------------------------------------------------------------------------------
+const bool Field::isGround(Field::FieldType type)
+{
+  return !isBuilding(type);
+}
+
+//------------------------------------------------------------------------------
+const bool Field::isBuilding(FieldType type)
+{
+  switch (type)
+  {
+    case FieldType::HOME:
+    case FieldType::MARKET:
+    case FieldType::CLINIC:
+    case FieldType::TOWNHALL:
+      return true;
+    default:
+      return false;
+  }
 }

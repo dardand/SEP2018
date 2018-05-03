@@ -12,17 +12,10 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include <stdio.h>
-#include <string>
-#include <vector>
-#include "Field.h"
 #include "Map.h"
 
 using std::string;
 using std::vector;
-using Sep::Field;
-using FieldType = Field::FieldType;
-using Sep::Map;
 
 namespace Sep
 {
@@ -67,9 +60,9 @@ namespace Sep
       ~Game();
     
       //------------------------------------------------------------------------
-      /// Displays the current playing field.
+      /// Returns a boolean value whether the current game is running.
       //
-      void run();
+      bool getRunning();
     
       //------------------------------------------------------------------------
       /// Changes the running state of the current game with a specified
@@ -79,59 +72,6 @@ namespace Sep
       //
       void setRunning(bool running);
     
-      //------------------------------------------------------------------------
-      /// Returns a boolean value whether the current game is running.
-      //
-      bool getRunning();
-    
-      //------------------------------------------------------------------------
-      /// Builds a field with specified type at a specified position.
-      ///
-      /// @param type The type of the field to build.
-      /// @param x The horizontal position of the field to build.
-      /// @param y The vertical position of the field to build.
-      ///
-      /// @return bool A boolen value indicating whether the field was build
-      ///              successfully.
-      //
-      bool build(const FieldType type, const int x, const int y);
-    
-      //------------------------------------------------------------------------
-      /// Builds a field with specified type and size at a specified position.
-      ///
-      /// @param type The type of the field to build.
-      /// @param x The horizontal position of the field to build.
-      /// @param y The vertical position of the field to build.
-      /// @param width The width of the field to build.
-      /// @param height The height of the field to build.
-      ///
-      /// @return bool A boolen value indicating whether the field was build
-      ///              successfully.
-      bool build(const FieldType type, const int x, const int y, const int width,
-                 const int height);
-    
-      //------------------------------------------------------------------------
-      /// Destroys a field on the map at a specified position. All related
-      /// fields will be destroyed too. Fields to destroy will be set to GRASS.
-      ///
-      /// @param x The horizontal position of the field to destroy.
-      /// @param y The vertical position of the field to destroy.
-      ///
-      /// @return bool A boolean value indicating whether the destruction at the
-      ///              specified positon was successfully.
-      //
-      bool destroy(const int x, const int y);
-      
-            //------------------------------------------------------------------------
-      /// This function returns the current amount of available funds.
-      /// 
-      /// @return money_ The amount of money.
-      //
-      int getMoney()
-      {
-        return money_;
-      }
-
       //------------------------------------------------------------------------
       /// Sets the a specified field at given coordinates and returns whether
       /// the coordinates are inside the playing field.
@@ -144,6 +84,31 @@ namespace Sep
       ///         is returned, otherwise false.
       //
       bool setField(Field &field, int x, int y);
+    
+      //------------------------------------------------------------------------
+      /// Runs the game by displaying a custom command line for user input. The
+      /// game runs until the user quits it with the therfore designated
+      /// command.
+      //
+      void run();
+    
+      /// This function sets the amount of money.
+      /// 
+      /// @return none
+      //
+      void setMoney(int money)
+      {
+        money_ = money;
+      }
+
+      /// This function returns the current amount of available funds.
+      /// 
+      /// @return money_ The amount of money.
+      //
+      int getMoney()
+      {
+        return money_;
+      }
     private:
     
       //------------------------------------------------------------------------
@@ -179,8 +144,22 @@ namespace Sep
       //------------------------------------------------------------------------
       /// The current playing field.
       //
-      Sep::Map map_;
+      Map map_;
     
+      //------------------------------------------------------------------------
+      /// Reads a specified config file and sets the read values into the
+      /// specified references.
+      ///
+      /// @param config The config file to read.
+      /// @param width The integer reference to store the read width in.
+      /// @param height The integer reference to store the read height in.
+      /// @param money The integer reference to store the read money in.
+      /// @param field_types The two dimensional field type vector to store
+      ///                    the field types in.
+      //
+      static void readConfig(const string config,
+                             int &width, int &height, int &money,
+                             vector<vector<Field::FieldType>> &field_types);
   };
 }
 

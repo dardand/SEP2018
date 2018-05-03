@@ -16,7 +16,6 @@
 //
 
 #include "Interface.h"
-#include "Field.h"
 #include "Game.h"
 #include "BadConfigException.h"
 

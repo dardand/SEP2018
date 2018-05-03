@@ -10,7 +10,7 @@
 //
 #include "Build.h"
 #include "Interface.h"
-
+#include "Buildable.h"
 //------------------------------------------------------------------------------
 Build::Build()
 {
@@ -37,25 +37,21 @@ Sep::Field* Build::getType(std::string type)
     case 1:
     {
       Sep::Field *water = new Sep::Field(FieldType::WATER, 1, 1);
-      std::cout << "HERE AT water" << std::endl;
       return water;
     }
     case 2:
     {
       Sep::Field *obstacle = new Sep::Field(FieldType::OBSTACLE, 1, 1);
-      std::cout << "HERE AT obstacle" << std::endl;
       return obstacle;
     }
     case 3:
     {
       Sep::Field *street = new Sep::Field(FieldType::STREET, 1, 1);
-      std::cout << "HERE AT street" << std::endl;
       return street;
     }
     default:
     {
       Sep::Field *unknown = new Sep::Field(FieldType::UNKNOWN, 1, 1);
-      //std::cout << "[ERR] Usage: build\n";
       return unknown;
     }
   }
@@ -75,6 +71,9 @@ Build::~Build()
 //------------------------------------------------------------------------------
 int Build::execute(Sep::Game& game, std::vector<std::string>& parameters)
 {
+  bool is_not_number = false;
+  int position_x;
+  int position_y;
   Sep::Interface io_;
   Sep::Game get_money(game);
   Build obj;
@@ -83,28 +82,45 @@ int Build::execute(Sep::Game& game, std::vector<std::string>& parameters)
     std::cout << "[ERR] Usage: build\n";
     return -1;
   }
-  bool is_not_number = false;
   for(int i = 1; i < parameters.size(); i++)
   {
-    for(int j = 0; j < parameters[i].length(); j++)
+    for(int j = 0; j < parameters[i].size(); j++)
     {
-      if(!(isdigit(parameters[i][j])))
+      if(!isdigit(parameters[i][j]))
       {
         is_not_number = true;
         break;
       }
     }
   }
+  try
+  {
+    position_x = std::stoi(parameters[1]);
+    position_y = std::stoi(parameters[2]);
+  }
+  catch(std::invalid_argument&) //or catch(...) to catch all exceptions
+  {
+    std::cout << "[ERR] Usage1: build\n";
+    return -1;
+  }
   Sep::Field *type = obj.getType(parameters[0]);
-  if(is_not_number || type->getType() == FieldType::UNKNOWN)
+  Sep::Buildable buildable_(Sep::Buildable::FieldType(type->getType()), position_x, position_y);
+  if(type->getType() == FieldType::UNKNOWN || is_not_number)
   {
     std::cout << "[ERR] Usage: build\n";
   }
+  else if(get_money.getMoney() < buildable_.getBuildCost())
+  {
+    std::cout << get_money.getMoney();
+    std::cout << "[INFO] Insufficient funds!\n";
+  }
   else
   {
-    io_.out(Sep::Interface::MONEY, std::to_string(get_money.getMoney()));
-    game.setField(*type, stoi(parameters[1], nullptr, 10), stoi(parameters[2], nullptr, 10));
+    if(game.setField(*type, stoi(parameters[1], nullptr, 10), stoi(parameters[2], nullptr, 10)))
+    {
+      game.setMoney(get_money.getMoney() - buildable_.getBuildCost());
+      io_.out(Sep::Interface::MONEY, std::to_string(get_money.getMoney() - buildable_.getBuildCost()));
+    }
   }
-  
   return -1;
 }

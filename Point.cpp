@@ -13,6 +13,8 @@
 
 using Sep::Point;
 
+
+
 // MARK: - Life cycle methods
 
 //------------------------------------------------------------------------------
@@ -21,17 +23,13 @@ Point::Point() : Point(0, 0)
 }
 
 //------------------------------------------------------------------------------
-Point::Point(const int x, const int y)
+Point::Point(const int x, const int y) : x_(x), y_(y)
 {
-  x_ = x;
-  y_ = y;
 }
 
 //------------------------------------------------------------------------------
-Point::Point(const Point &point)
+Point::Point(const Point &point)  : x_(point.x_), y_(point.y_)
 {
-  x_ = point.x_;
-  y_ = point.y_;
 }
 
 //------------------------------------------------------------------------------

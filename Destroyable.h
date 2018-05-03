@@ -12,7 +12,6 @@
 #ifndef DESTROYABLE_H
 #define DESTROYABLE_H
 
-#include <stdio.h>
 #include "Buildable.h"
 
 namespace Sep

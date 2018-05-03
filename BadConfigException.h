@@ -12,7 +12,6 @@
 #ifndef BAD_CONFIG_EXCEPTION_H
 #define BAD_CONFIG_EXCEPTION_H
 
-#include <stdio.h>
 #include <exception>
 
 namespace Sep

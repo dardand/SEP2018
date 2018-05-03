@@ -12,7 +12,6 @@
 #ifndef FIELD_H
 #define FIELD_H
 
-#include <stdio.h>
 #include <string>
 
 using std::string;
@@ -56,7 +55,7 @@ namespace Sep
       /// @param width The width of the new Field instance.
       /// @param height The height of the new Field instance.
       //
-      Field(const FieldType type, const int width, const int height);
+      Field(const FieldType type, const int width = 1, const int height = 1);
     
       //------------------------------------------------------------------------
       /// Creates a new Field instance by copying the attributes of a specified
@@ -117,7 +116,28 @@ namespace Sep
       //
       const int getSize();
     
-      Field(const FieldType type);
+      //------------------------------------------------------------------------
+      /// Returns a boolean value indicating whether fields of a specified field
+      /// type are ground fields.
+      ///
+      /// @param type The field type to check.
+      ///
+      /// @return bool The boolean value indicating whether fields of the
+      ///              specified field type are ground fields.
+      //
+      static const bool isGround(FieldType type);
+    
+      //------------------------------------------------------------------------
+      /// Returns a boolean value indicating whether fields of a specified field
+      /// type are building fields.
+      ///
+      /// @param type The field type to check.
+      ///
+      /// @return bool The boolean value indicating whether fields of the
+      ///              specified field type are building fields.
+      //
+      static const bool isBuilding(FieldType type);
+    
     private:
     
       //------------------------------------------------------------------------

@@ -12,14 +12,13 @@
 #ifndef MAP_H
 #define MAP_H
 
-#include <stdio.h>
 #include <vector>
-#include "Interface.h"
 #include "Field.h"
 
 using std::string;
 using std::vector;
-using Sep::Interface;
+using Sep::Field;
+using FieldType = Sep::Field::FieldType;
 
 namespace Sep
 {
@@ -38,20 +37,16 @@ namespace Sep
       Map();
     
       //------------------------------------------------------------------------
-      /// Creates a new Map instance from a specified string representing the
-      /// field map by concatenating the rows.
+      /// Creates a new Map instance with specified size. Each field in the
+      /// newly instantiated map will be set to the specified type.
       ///
-      /// @param flat_map The string reprentation of field types from whom to
-      ///                 to generate the new Map instance. Each field type is
-      ///                 represented by a specific character (e.g. G for Grass,
-      ///                 etc). For more details see FieldType definition.
-      ///                 Each map consists of a specific number of columns with
-      ///                 a specific number of rows. In the string
-      ///                 representation of the field types all rows of
-      ///                 characters are concatenated.
-      /// @param concatenations The number concatenated rows.
+      /// @param width The number of columns.
+      /// @param height The number of rows per column.
+      /// @param type The type used to initialize the map's fields with. Default
+      ///             type is GRASS.
       //
-      Map(const string flat_map, const int concatenations);
+      Map(const int width, const int height,
+          const FieldType type = FieldType::GRASS);
     
       //------------------------------------------------------------------------
       /// Creates a new Map instance by copying the attributes of a specified
@@ -99,20 +94,79 @@ namespace Sep
       Point *getOrigin(Field &field);
     
       //------------------------------------------------------------------------
+      /// Returns the field types of the map instance as two dimensional vector.
+      ///
+      /// @return vector<vector<FieldType>> The two dimensional field type
+      ///                                   vector of the map.
+      //
+      vector<vector<FieldType>> getFieldTypes();
+    
+      //------------------------------------------------------------------------
       /// Sets a specified field at a given position.
       ///
       /// @param field The field to set.
       /// @param x The horizontal position to set the field.
       /// @param y The vertical position to set the field.
+      ///
+      /// @return bool A boolean value indicating whether the field was
+      ///              successfully set at the specified position.
       //
-      void setField(Field &field, const int x, const int y);
+      bool setField(Field &field, const int x, const int y);
     
       //------------------------------------------------------------------------
-      /// Prints the map on a specified interface.
+      /// Returns a boolean value indicating whether the specified coordinates
+      /// are within the bounds of the map.
       ///
-      /// @param io The interface where to print the map.
+      /// @param x The horizontal position to check.
+      /// @param y The vertical position to check.
+      ///
+      /// @return bool A boolean value indicating whether the specified
+      ///              coordinates are within the map's bounds.
       //
-      void print(const Interface &io);
+      bool isWithinBounds(const int x, const int y);
+    
+      //------------------------------------------------------------------------
+      /// Returns a boolean value indicating whether the specified field at the
+      /// specified position is completely within the bounds of the map.
+      ///
+      /// @param field The field whose frame to check.
+      /// @param x The horizontal position of the field.
+      /// @param y The vertical position of the field.
+      ///
+      /// @return bool A boolean value indicating whether the specified field
+      ///              at the specified coordinates is completely within the
+      ///              map's bounds.
+      //
+      bool isWithinBounds(Field &field, const int x, const int y);
+    
+      //------------------------------------------------------------------------
+      /// Returns a boolean value indicating whether a specified field at a
+      /// specified position has a free area to be build. The area is free, if
+      /// the field can be fully placed onto the map and if all fields affected
+      /// by the field are of type GRASS.
+      ///
+      /// @param field The field whose area to check.
+      /// @param x The horizontal position of the field.
+      /// @param y The vertical position of the field.
+      ///
+      /// @return bool A boolean value indicating whether the specified field's
+      ///              area is free.
+      //
+      bool hasFreeArea(Field &field, const int x, const int y);
+    
+      //------------------------------------------------------------------------
+      /// Returns a boolean value indicating whether a specified field at a
+      /// specified position borders another building. The boundaries are free,
+      /// if no other buiding borders the field.
+      ///
+      /// @param field The field whose boundaries to check.
+      /// @param x The horizontal position of the field.
+      /// @param y The vertical position of the field.
+      ///
+      /// @return bool A boolean value indicating whether the specified field's
+      ///              boundaries are free.
+      //
+      bool hasFreeBoundaries(Field &field, const int x, const int y);
     
     private:
     
